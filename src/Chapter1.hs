@@ -437,7 +437,7 @@ Implement the function that takes an integer value and returns the next 'Int'.
   function body with the proper implementation.
 -}
 next :: Int -> Int
-next x = x+1
+next x = x + 1
 
 {- |
 After you've implemented the function (or even during the implementation), you
@@ -478,7 +478,7 @@ Implement a function that returns the last digit of a given number.
   whether it works for you!
 -}
 lastDigit :: Int -> Int
-lastDigit n = mod n 10
+lastDigit n = mod (abs n) 10
 
 
 {- |
@@ -637,12 +637,10 @@ Try to introduce variables in this task (either with let-in or where) to avoid
 specifying complex expressions.
 -}
 sumLast2 :: Int -> Int
-sumLast2 n = sumA n + sumB n
-  where
-    sumA :: Int -> Int
-    sumA x = mod (div x 10) 10
-    sumB :: Int -> Int
-    sumB x = mod x 10
+sumLast2 n = 
+  let lastTwo = mod (abs n) 100
+      (tenth, zeroth) = divMod lastTwo 10
+  in tenth + zeroth
 
 
 {- |
@@ -664,7 +662,7 @@ aren't ready for this boss yet!
 -}
 firstDigit :: Int -> Int
 firstDigit n
-  | div n 10==0 = mod n 10
+  | (abs n) < 10 = abs n
   | otherwise = firstDigit (div n 10)
 
 
